@@ -3,7 +3,14 @@
 #ifdef PROD
 #include <config.h>
 #else
-#include <../config.h>
+#define PACKAGE "minimacs"
+#define PACKAGE_BUGREPORT "elia.toselli@outlook.it"
+#define PACKAGE_NAME "minimacs"
+#define PACKAGE_STRING "minimacs 0.1"
+#define PACKAGE_TARNAME "minimacs"
+#define PACKAGE_URL ""
+#define PACKAGE_VERSION "0.1"
+#define VERSION "0.1"
 #endif
 #define VERSION "0.1"
 
