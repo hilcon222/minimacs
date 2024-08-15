@@ -3,3 +3,5 @@ config.status
 config.log
 config.h
 stamp-h1
+autom4te.cache/output.*
+autom4te.cache/output.1
