@@ -14,6 +14,11 @@
 #define VERSION "0.1"
 #endif
 
+#ifndef CTRL
+#define CTRL(c) ((c) & 037)
+#endif
+
+
 int rows, cols;
 
 char *buffer;
@@ -47,7 +52,7 @@ void lastLine(void) {
 
 void endprog(void) {
     echo();
-    nocbreak();
+    noraw();
     endwin();
 }
 
@@ -55,7 +60,7 @@ void init_program() {
     initscr();
 	clear();
 	noecho();
-	cbreak();
+	raw();
     keypad(stdscr, true);
 }
 
@@ -71,9 +76,30 @@ int inpchar(void) {
         }
         maxsiz += BUFSIZ;
     }
+    if (c == KEY_BACKSPACE) {
+        inpsize--;
+        int x, y;
+        getyx(stdscr, y, x);
+        if (y == 1 && x == 0) {
+            return 0;
+        }
+        move(y, x-1);
+        delch();
+        *(pos--) = '\0';
+        return 0;
+    }
+    if (c == CTRL('x')) {
+        int c2;
+        if ((c2 = getch()) == CTRL('c')) {
+            endprog();
+            exit(0);
+        }
+        return 0;
+    }
     inpsize++;
     addch(c);
     *(pos++) = c;
+    return c;
 }
 
 int main() {
