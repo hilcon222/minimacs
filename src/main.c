@@ -1,24 +1,14 @@
-#include <ncurses.h>
-#include <string.h>
-#include <stdlib.h>
-#ifdef PROD
-#include <config.h>
-#else
-#define PACKAGE "minimacs"
-#define PACKAGE_BUGREPORT "elia.toselli@outlook.it"
-#define PACKAGE_NAME "minimacs"
-#define PACKAGE_STRING "minimacs 0.2"
-#define PACKAGE_TARNAME "minimacs"
-#define PACKAGE_URL ""
-#define PACKAGE_VERSION "0.2"
-#define VERSION "0.2"
-#endif
+#include "minimacs.h"
 
-#ifndef CTRL
-#define CTRL(c) ((c) & 037)
-#endif
+char *filename;
 
-
-int main() {
-    return 0;
+int main(int argc, char **argv) {
+    extern char *filename;
+    check_args();
+    filename = argv[1];
+    initnc();
+    printw("hey");
+    refresh();
+    getch();
+    endnc();
 }

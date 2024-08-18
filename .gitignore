@@ -9,3 +9,5 @@ Makefile
 src/main.o
 *.o
 src/minimacs
+.vscode/settings.json
+autom4te.cache/
